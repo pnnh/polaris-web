@@ -3,6 +3,7 @@ import React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
 import express from 'express';  
 import { createServer as createViteServer } from 'vite'
+import { render } from './entry-server';
 
 const app: express.Application = express();
 
@@ -24,7 +25,7 @@ app.use('*', async (req, res, next) => {
 
     template = await vite.transformIndexHtml(url, template)
 
-    const { render } = await vite.ssrLoadModule('/src/entry-server.tsx')
+    //const { render } = await vite.ssrLoadModule('/src/entry-server.tsx')
 
     const appHtml = await render(url)
 
