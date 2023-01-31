@@ -6,5 +6,11 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
       "~": path.resolve(__dirname, "node_modules"),
     },
+  },
+  css: {
+    /* CSS 预处理器 */
+    preprocessorOptions: {
+      scss: {}
+    }
   }
 })

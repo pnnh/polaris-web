@@ -2,10 +2,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import './styles/index.scss'
-import './components/controls'
-import { HomeClientPage } from './client/pages/home-client'
 
+import '../components/controls' 
+ 
+
+export function HomeClientPage() {
+    return <div>
+        <h1>Home Client Page</h1>
+    </div>
+    }
 
 const App = () => {
   return <Router>

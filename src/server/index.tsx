@@ -11,16 +11,16 @@ export async function LoadHomePage() {
     return <html lang="zh">
         <head>
             <title>北极星</title>
+            <link type="text/css" rel="stylesheet" href="/src/client/index.scss"></link>
         </head>
-        <body className="home">
+        <body className="home-page">
             <div>
                 <HeaderPartial />
                 <main>
                     {piclist}
-
                 </main>
             </div>
-            <script type='module' src='/src/entry-client.tsx'></script>
+            <script type='module' src='/src/client/index.tsx'></script>
         </body>
     </html>
 }
@@ -28,12 +28,17 @@ export async function LoadHomePage() {
 export async function LoadPictureList() {
     const models = await selectArticleModels()
 
-    return <div className="picture-list">
-        {models.map((model) => {
-            return <PictureItem key={model.pk} model={model} />
-        })
-        }
+    return <div className="fx-grid">
+        <div className="ms-Grid-col ms-sm12 ms-xl8">
+            <div className="article-list">
+                {models.map((model) => {
+                    return <PictureItem key={model.pk} model={model} />
+                })
+                }
+            </div>
+        </div>
     </div>
+
 }
 
 function PictureItem(props: { model: ArticleModel }) {
