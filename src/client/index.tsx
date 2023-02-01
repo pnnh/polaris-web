@@ -3,14 +3,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-import '../components/controls' 
- 
+import './elements/elements'
 
 export function HomeClientPage() {
-    return <div>
-        <h1>Home Client Page</h1>
-    </div>
-    }
+  return <div>
+    <h1>Home Client Page</h1>
+  </div>
+}
 
 const App = () => {
   return <Router>

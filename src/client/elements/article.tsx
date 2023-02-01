@@ -12,7 +12,7 @@ class ArticleElement extends HTMLElement {
           return
         }
         const code = e.innerText
-        const language = e.className
+        const language = e.className.replace('language-', '')
         console.debug('code language: ', language)
         if (language) {
           let html = code

@@ -1,10 +1,12 @@
 
-import React from 'react';
+import React, { ReactElement } from 'react';
 import * as ReactDOMServer from 'react-dom/server';
 import express from 'express';
 import { createServer as createViteServer } from 'vite'
 import { LoadHomePage } from './server';
 import html from "html";
+import { JsxElement } from 'typescript';
+import { LoadArticleReadPage } from './server/articles/read';
 
 const app: express.Application = express();
 
@@ -18,16 +20,11 @@ app.use(vite.middlewares)
 const isProduction = process.env.NODE_ENV === 'production'
 
 
-export async function render(url: string) {
+export async function renderPage(element: ReactElement) {
 
-  console.log('rendering', url)
 
   let pageHtml = ""
-  if (url === "/") {
-    const homePage = await LoadHomePage();
-    pageHtml = ReactDOMServer.renderToStaticMarkup(homePage);
-  }
-
+  pageHtml = ReactDOMServer.renderToStaticMarkup(element);
   if (!isProduction) {
     pageHtml = html.prettyPrint(pageHtml, { indent_size: 4 });
   }
@@ -36,28 +33,32 @@ export async function render(url: string) {
   return pageHtml
 }
 
-app.use('*', async (req, res, next) => {
-  const url = req.originalUrl
-
+app.get('/article/read/:pk', async (req, res, next) => {
   try {
-    // let template = "<html><header></header><body><!--ssr-outlet--></body></html>"
+    const homePage = await LoadArticleReadPage(req.params.pk)
+    const appHtml = await renderPage(homePage)
 
-    // template = await vite.transformIndexHtml(url, template)
-
-    //const { render } = await vite.ssrLoadModule('/src/entry-server.tsx')
-
-    const appHtml = await render(url)
-
-    //const html = template.replace(`<!--ssr-outlet-->`, appHtml)
     const html = appHtml;
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e: any) {
-    vite.ssrFixStacktrace(e)
     next(e)
   }
 })
 
+
+app.use('/', async (req, res, next) => {
+  try {
+    const homePage = await LoadHomePage()
+    const appHtml = await renderPage(homePage)
+
+    const html = appHtml;
+
+    res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
+  } catch (e: any) {
+    next(e)
+  }
+})
 
 
 app.listen(8100, () => {

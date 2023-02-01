@@ -1,17 +1,24 @@
 @import "media";
+@import "~/prismjs/themes/prism.min.css";
+
 // 文章编辑页面
 .article-edit-page {
   .article-edit {
-    .title-area, .body-area, .submit-area {
+
+    .title-area,
+    .body-area,
+    .submit-area {
       background: #FFFFFF;
       border-radius: 4px;
     }
 
-    .title-area, .body-area {
+    .title-area,
+    .body-area {
       margin-bottom: 16px;
     }
 
-    .title-area, .submit-area {
+    .title-area,
+    .submit-area {
       padding: 16px;
     }
 
@@ -38,6 +45,7 @@
     .page-left {
       flex-grow: 1;
       overflow: auto;
+
       .article-body pre {
         white-space: break-spaces;
       }
@@ -88,7 +96,8 @@
         }
       }
 
-      .creator-info, .article-toc {
+      .creator-info,
+      .article-toc {
         width: 288px;
       }
 
@@ -157,17 +166,20 @@
     display: flex;
     flex-direction: row;
 
-    > div {
+    >div {
       margin-right: 8px;
     }
   }
 
-  .new-button, .edit-button {
+  .new-button,
+  .edit-button {
     display: none;
   }
 
   article {
-    .article-title, .article-body {
+
+    .article-title,
+    .article-body {
       padding: 16px;
       background: #FFFFFF;
       border-radius: 4px;
@@ -204,14 +216,17 @@
       display: flex;
       flex-direction: row;
 
-      > button {
+      >button {
         margin-left: 8px;
       }
     }
-    .new-button, .edit-button {
+
+    .new-button,
+    .edit-button {
       display: block;
     }
   }
+
   @media (min-width: $screen-desktop) {
     main {
       width: 1024px;

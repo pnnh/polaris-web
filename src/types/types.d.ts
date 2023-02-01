@@ -6,10 +6,12 @@ export {}
 
 declare global {
   interface Window {
-    Module: any;
-    QtLoader: any;
-
-    randomString(length: number, letter: boolean,
-                 uppercaseLetter: boolean, symbol: boolean): string;
+    Module: any; 
+ 
   }
-}
+  namespace JSX {
+    interface IntrinsicElements {
+      'polaris-article': { };
+    }
+  }
+} 

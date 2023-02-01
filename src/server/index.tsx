@@ -44,12 +44,12 @@ export async function LoadPictureList() {
 function PictureItem(props: { model: ArticleModel }) {
 
     return <div className="article-item">
-        <div data-name="{{.Pk}}" data-type="object">
+        <div>
             <div className="article-link">
-                <a href="/article/read/FHIlDUBAEAA">{props.model.title}</a>
+                <a href={"/article/read/" + props.model.pk}>{props.model.title}</a>
             </div>
             <div className="article-description">
-
+                {props.model.description}
             </div>
             <div className="article-info">
                 <span className="update-time"><i className="ri-time-line"></i></span>
