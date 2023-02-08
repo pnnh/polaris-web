@@ -1,6 +1,6 @@
 import React from "react";
 import { HeaderPartial } from "../partial/header";
-import { selectArticleModels, ArticleModel, getArticleModel } from "@/models/article";
+import { selectArticleModels, ArticleModel, getArticleModel, buildBodyHtml, TocItem } from "@/models/article";
 import { marked } from "marked";
 
 export async function LoadArticleReadPage(pk: string) {
@@ -28,10 +28,17 @@ export async function LoadArticleReadPage(pk: string) {
 }
 
 async function renderArticle(article: ArticleModel) {
-    if (article.header != 'markdown') {
+    let bodyHtml = "";
+    let tocList: TocItem[] = [];
+    tocList.push({ title: article.title, header: 0 });
+    if (article.header == 'stele') {
+        var bodyObject = JSON.parse(article.body);
+        bodyHtml = buildBodyHtml(tocList, bodyObject)
+    } else if (article.header == 'markdown') {
+        bodyHtml = marked.parse(article.body);
+    } else {
         return <div>暂不支持的文章类型</div>
     }
-    const bodyHtml = marked.parse(article.body);
     return <div className="article-info">
         <div>{article.title}</div>
         <div>

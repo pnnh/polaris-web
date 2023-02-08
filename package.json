@@ -11,6 +11,8 @@
   "type": "module",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "axios": "^0.27.2",
     "express": "^4.18.2",
     "html": "^1.0.0",
