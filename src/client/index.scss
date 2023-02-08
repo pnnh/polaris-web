@@ -1,12 +1,75 @@
-@import "./styles/base";
-@import "./styles/navtop";
-@import "./styles/controls";
-@import "./styles/pages";
+@charset "UTF-8";
 
-.brown-text {
-  color: brown;
+@import "./styles/media";
+@import "./styles/controls";
+@import "./styles/article";
+@import "./styles/home";
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  min-width: $screen-small;
+  margin: 0;
+  padding: 0;
+  background: #F4F7F9;
+  overflow-x: hidden;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
 }
 
-.red-text {
-  color: red;
+
+.nav-header {
+  background: #FFFFFF;
+  border-bottom: solid 1px #f1f1f1;
+  margin-bottom: 24px;
+
+  .header-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 56px;
+    justify-content: space-between;
+
+    .header-left {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .header-right {
+      display: inline-flex;
+      justify-content: flex-end;
+    }
+  }
+
+  a.link {
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    margin-right: 4px;
+  }
+}
+
+footer {
+  height: 56px;
+}
+
+@media (min-width: $screen-desktop) {
+  main {
+    width: 1024px;
+    margin: 0 auto;
+
+    .page-right {
+      display: block;
+    }
+  }
+
+  header,
+  footer {
+    .fx-grid {
+      width: 960px;
+      margin: 0 auto;
+    }
+  }
 }

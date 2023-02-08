@@ -55,48 +55,6 @@
       display: none;
       margin-left: 16px;
 
-      .creator-info {
-        .profile {
-          display: flex;
-          flex-direction: row;
-
-          .creator-photo {
-            height: 48px;
-            width: 48px;
-            border-radius: 8px;
-            border: 2px solid #a8a8a8;
-            cursor: pointer;
-
-            &:hover {
-              border-color: #333333CC;
-            }
-          }
-
-          .profile-right {
-            margin-left: 16px;
-            display: flex;
-            flex-direction: column;
-
-            .nickname {
-              color: #333333;
-            }
-
-            .email {
-              margin-top: 8px;
-              color: #515767;
-            }
-          }
-
-        }
-
-        .desc {
-          margin-top: 16px;
-          font-size: 14px;
-          color: #7e7e7e;
-        }
-      }
-
-      .creator-info,
       .article-toc {
         width: 288px;
       }
@@ -135,46 +93,8 @@
       margin-right: 8px;
     }
   }
-
-  .fx-paragraph {
-    .fx-code {
-      background-color: #edebe9;
-      padding: 0 4px;
-      border-radius: 2px;
-      display: inline-block;
-    }
-
-    .fx-bold {
-      font-weight: bold;
-    }
-
-    .fx-italic {
-      font-style: italic;
-    }
-  }
-
-  .fx-code-block {
-    background: #f6f6f6;
-    border-radius: 4px;
-    padding: 8px;
-    margin: 8px 0;
-    line-height: 20px;
-    overflow: auto;
-  }
-
-  .article-page-menu {
-    display: flex;
-    flex-direction: row;
-
-    >div {
-      margin-right: 8px;
-    }
-  }
-
-  .new-button,
-  .edit-button {
-    display: none;
-  }
+ 
+ 
 
   article {
 
@@ -206,35 +126,5 @@
       }
     }
   }
-
-  #user-menu {
-    display: none;
-  }
-
-  @media (min-width: $screen-tablet) {
-    #user-menu {
-      display: flex;
-      flex-direction: row;
-
-      >button {
-        margin-left: 8px;
-      }
-    }
-
-    .new-button,
-    .edit-button {
-      display: block;
-    }
-  }
-
-  @media (min-width: $screen-desktop) {
-    main {
-      width: 1024px;
-      margin: 0 auto;
-
-      .page-right {
-        display: block;
-      }
-    }
-  }
+   
 }

@@ -10,8 +10,7 @@ export function HeaderPartial() {
 					<a className="link" href='/'>文章</a> 
 				</div>
 			</div>
-			<div className="ms-Grid-col ms-xl4 header-right">
-				<div id="user-menu"></div>
+			<div className="ms-Grid-col ms-xl4 header-right"> 
 			</div>
 		</div>
 	</div>
