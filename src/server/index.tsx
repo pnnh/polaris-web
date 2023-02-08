@@ -6,7 +6,7 @@ import { selectArticleModels, ArticleModel } from "@/models/article";
 import { Loading } from "@/components/loading";
 import { Error } from "@/components/error";
 
-export async function LoadHomePage() {
+export async function LoadHomePage2() {
     const piclist = await LoadPictureList()
     return <html lang="zh">
         <head>
@@ -23,6 +23,11 @@ export async function LoadHomePage() {
             <script type='module' src='/src/client/index.tsx'></script>
         </body>
     </html>
+}
+
+export async function LoadHomePage() {
+    const piclist = await LoadPictureList()
+    return piclist
 }
 
 export async function LoadPictureList() {
