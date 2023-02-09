@@ -1,5 +1,3 @@
-
-
 .articleInfo {
 
   display: flex;
@@ -20,8 +18,8 @@
 }
 
 .articleInfo .article-title {
-    margin-bottom: 16px;
-  } 
+  margin-bottom: 16px;
+}
 
 .articleInfo .article-title,
 .article-body {
@@ -30,14 +28,12 @@
   border-radius: 4px;
 }
 
-.articleInfo 
-.page-left {
+.articleInfo .page-left {
   flex-grow: 1;
   overflow: auto;
 
 }
 
-.articleInfo 
-.page-left .article-body pre {
+.articleInfo .page-left .article-body pre {
   white-space: break-spaces;
 }
