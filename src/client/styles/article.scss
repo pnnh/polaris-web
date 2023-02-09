@@ -1,130 +1,45 @@
 @import "media";
 @import "~/prismjs/themes/prism.min.css";
 
-// 文章编辑页面
-.article-edit-page {
-  .article-edit {
+article {
 
-    .title-area,
-    .body-area,
-    .submit-area {
-      background: #FFFFFF;
-      border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+
+  .page-left {
+    flex-grow: 1;
+    overflow: auto;
+
+    .article-body pre {
+      white-space: break-spaces;
     }
+  }
+  
+  .article-title,
+  .article-body {
+    padding: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+  }
 
-    .title-area,
-    .body-area {
+  .article-title {
+    h1 {
       margin-bottom: 16px;
-    }
-
-    .title-area,
-    .submit-area {
-      padding: 16px;
     }
 
     .description {
-      margin-top: 8px;
-      margin-bottom: 16px;
+      font-size: 14px;
     }
   }
 
-  @media (min-width: $screen-desktop) {
-    .article-edit {
-      width: 960px;
-      margin: 0 auto;
+  .article-body {
+    margin-top: 16px;
+
+    p {
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.6;
+      word-break: break-word;
     }
   }
-}
-
-// 文章查看页面
-.article-read-page {
-  main {
-    display: flex;
-    flex-direction: row;
-
-    .page-left {
-      flex-grow: 1;
-      overflow: auto;
-
-      .article-body pre {
-        white-space: break-spaces;
-      }
-    }
-
-    .page-right {
-      display: none;
-      margin-left: 16px;
-
-      .article-toc {
-        width: 288px;
-      }
-
-      .article-toc {
-        .toc-item {
-          padding: 8px 0;
-          border-radius: 2px;
-
-          &:hover {
-            background-color: #ececec;
-          }
-
-          a {
-            color: #333;
-            font-size: 14px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            display: inline-block;
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
-
-  .keywords-list {
-    margin-top: 8px;
-
-    .keyword {
-      background: #efefef;
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 4px;
-      margin-right: 8px;
-    }
-  }
- 
- 
-
-  article {
-
-    .article-title,
-    .article-body {
-      padding: 16px;
-      background: #FFFFFF;
-      border-radius: 4px;
-    }
-
-    .article-title {
-      h1 {
-        margin-bottom: 16px;
-      }
-
-      .description {
-        font-size: 14px;
-      }
-    }
-
-    .article-body {
-      margin-top: 16px;
-
-      p {
-        font-weight: 400;
-        font-size: 15px;
-        line-height: 1.6;
-        word-break: break-word;
-      }
-    }
-  }
-   
 }

@@ -10,23 +10,23 @@ import './elements/elements'
 import loadApp from '@/common/app';
 import { hydrateRoot } from 'react-dom/client';
  
-const cache = createEmotionCache();
+//const cache = createEmotionCache();
 
-async function loadMain() {
-  const app = await loadApp();
-  return (
-    <BrowserRouter>
-      <CacheProvider value={cache}>
-        <CssBaseline />
-        {app}
-      </CacheProvider>
-    </BrowserRouter>
-  );
-}
+// async function loadMain() {
+//   const app = await loadApp();
+//   return (
+//     <BrowserRouter>
+//       <CacheProvider value={cache}>
+//         <CssBaseline />
+//         {app}
+//       </CacheProvider>
+//     </BrowserRouter>
+//   );
+// }
 
-loadMain().then((main) => {
-  const root = document.querySelector('#root');
-  if (root)  {
-    hydrateRoot(root, main);
-  }
-});
+// loadMain().then((main) => {
+//   const root = document.querySelector('#root');
+//   if (root)  {
+//     hydrateRoot(root, main);
+//   }
+// });

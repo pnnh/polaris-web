@@ -6,25 +6,6 @@ import { selectArticleModels, ArticleModel } from "@/models/article";
 import { Loading } from "@/components/loading";
 import { Error } from "@/components/error";
 
-export async function LoadHomePage2() {
-    const piclist = await LoadPictureList()
-    return <html lang="zh">
-        <head>
-            <title>北极星</title>
-            <link type="text/css" rel="stylesheet" href="/src/client/index.scss"></link>
-        </head>
-        <body className="home-page">
-            <div>
-                <HeaderPartial />
-                <main>
-                    {piclist}
-                </main>
-            </div>
-            <script type='module' src='/src/client/index.tsx'></script>
-        </body>
-    </html>
-}
-
 export async function LoadHomePage() {
     const piclist = await LoadPictureList()
     return <div>

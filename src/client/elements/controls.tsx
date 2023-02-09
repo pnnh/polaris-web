@@ -1,3 +1,5 @@
+'use client';
+
 class UserCard extends HTMLElement { 
   constructor () {
     super()

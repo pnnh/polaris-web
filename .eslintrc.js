@@ -7,7 +7,8 @@ module.exports = {
     'plugin:react/recommended',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'standard'
+    'standard',
+    "next/core-web-vitals"
   ],
   globals: {
     React: 'readonly',

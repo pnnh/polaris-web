@@ -5,8 +5,7 @@
 @import '@fontsource/roboto/500.css';
 @import '@fontsource/roboto/700.css';
 
-@import "./styles/media";
-@import "./styles/controls";
+@import "./styles/media"; 
 @import "./styles/article";
 @import "./styles/home";
 
@@ -64,10 +63,7 @@ footer {
   main {
     width: 1024px;
     margin: 0 auto;
-
-    .page-right {
-      display: block;
-    }
+ 
   }
 
   header,

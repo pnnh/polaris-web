@@ -18,6 +18,7 @@ import loadApp from '@/common/app';
 import { RestfulAddress } from './utils/config';
 import { prettyPrint } from 'html';
 import cssbeautify from 'cssbeautify';
+import { createMemoryRouter } from 'react-router-dom';
 
 
 const isDevelopment = process.env.NODE_ENV === 'development'
@@ -55,10 +56,10 @@ async function startServer() {
   const app: express.Application = express();
 
   // 设置超时 返回超时响应
-  app.use(timeout(30 * 1e3));
-  app.use((req, res, next) => {
-    if (!req.timedout) next();
-  });
+  // app.use(timeout(30 * 1e3));
+  // app.use((req, res, next) => {
+  //   if (!req.timedout) next();
+  // });
 
   app.use(createProxyMiddleware('/restful/article', {
     target: RestfulAddress.ArticleService,
@@ -98,6 +99,11 @@ async function startServer() {
         createEmotionServer(cache);
       const app = await loadApp();
 
+      const router = createMemoryRouter(app, {
+        initialEntries: ["/", "/events/123"],
+        initialIndex: 1,
+      });
+
       let html = renderToString(
         <StaticRouter location={req.url}>
           <CacheProvider value={cache}>
@@ -125,18 +131,6 @@ async function startServer() {
     }
   })
 
-  // app.use('/', async (req, res, next) => {
-  //   try {
-  //     const homePage = await LoadHomePage()
-  //     const appHtml = await renderPage(homePage)
-
-  //     const html = appHtml;
-
-  //     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
-  //   } catch (e: any) {
-  //     next(e)
-  //   }
-  // })
   app.listen(8100, () => {
     console.log('Example app listening on port 8100!');
   });

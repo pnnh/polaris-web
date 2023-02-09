@@ -19,6 +19,12 @@
             "env": {
                 "NODE_ENV": "development"
             }
-        }
+        },
+        {
+            "name": "Next.js: debug server-side",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm run dev"
+          },
     ]
 }

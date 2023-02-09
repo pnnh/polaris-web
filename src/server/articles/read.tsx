@@ -10,21 +10,7 @@ export async function LoadArticleReadPage(pk: string) {
     }
     const articleHtml = await renderArticle(articleModel)
 
-    return <html lang="zh">
-        <head>
-            <title>北极星</title>
-            <link type="text/css" rel="stylesheet" href="/src/client/index.scss"></link>
-        </head>
-        <body className="home-page">
-            <div>
-                <HeaderPartial />
-                <main>
-                    {articleHtml}
-                </main>
-            </div>
-            <script type='module' src='/src/client/index.tsx'></script>
-        </body>
-    </html>
+    return articleHtml;
 }
 
 async function renderArticle(article: ArticleModel) {
@@ -39,12 +25,12 @@ async function renderArticle(article: ArticleModel) {
     } else {
         return <div>暂不支持的文章类型</div>
     }
-    return <div className="article-info">
-        <div>{article.title}</div>
-        <div>
-            <polaris-article>
+    return <article>
+        <div className="article-info">
+            <div>{article.title}</div>
+            <div>
                 <div className="article-body" dangerouslySetInnerHTML={{ __html: bodyHtml }} ></div>
-            </polaris-article>
+            </div>
         </div>
-    </div>
+    </article>
 }

@@ -1,8 +1,10 @@
+'use client';
+
 import Prism from 'prismjs'
 
 class ArticleElement extends HTMLElement {
   constructor() {
-    super()
+    super() 
     console.debug('polaris-article constructor')
     // 代码块语法高亮
     const codes = this.getElementsByTagName('code')
