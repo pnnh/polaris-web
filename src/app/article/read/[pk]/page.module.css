@@ -1,0 +1,43 @@
+
+
+.articleInfo {
+
+  display: flex;
+  flex-direction: row;
+
+}
+
+.articleInfo .article-body {
+  margin-top: 16px;
+
+}
+
+.articleInfo .article-body p {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.articleInfo .article-title {
+    margin-bottom: 16px;
+  } 
+
+.articleInfo .article-title,
+.article-body {
+  padding: 16px;
+  background: #FFFFFF;
+  border-radius: 4px;
+}
+
+.articleInfo 
+.page-left {
+  flex-grow: 1;
+  overflow: auto;
+
+}
+
+.articleInfo 
+.page-left .article-body pre {
+  white-space: break-spaces;
+}
