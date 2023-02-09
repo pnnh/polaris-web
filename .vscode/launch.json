@@ -15,7 +15,10 @@
             "sourceMaps": true,
             "cwd": "${workspaceRoot}",
             "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "env": {
+                "NODE_ENV": "development"
+            }
         }
     ]
 }

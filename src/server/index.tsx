@@ -27,7 +27,10 @@ export async function LoadHomePage2() {
 
 export async function LoadHomePage() {
     const piclist = await LoadPictureList()
-    return piclist
+    return <div>
+        <HeaderPartial />
+        {piclist}
+    </div>
 }
 
 export async function LoadPictureList() {

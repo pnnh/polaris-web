@@ -5,27 +5,11 @@ import { BrowserRouter, BrowserRouter as Router, Route, Routes } from 'react-rou
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
-import theme from '../common/theme';
 import createEmotionCache from '../common/createEmotionCache';
 import './elements/elements'
 import loadApp from '@/common/app';
-
-// export function HomeClientPage() {
-//   return <div>
-//     <h1>Home Client Page</h1>
-//   </div>
-// }
-
-
-
-// const rootElement = document.getElementById('root')
-// if (rootElement) {
-//   ReactDOM.render(<App />, rootElement)
-// }
-
-
-
-
+import { hydrateRoot } from 'react-dom/client';
+ 
 const cache = createEmotionCache();
 
 async function loadMain() {
@@ -41,5 +25,8 @@ async function loadMain() {
 }
 
 loadMain().then((main) => {
-  ReactDOM.hydrate(main, document.querySelector('#root'));
+  const root = document.querySelector('#root');
+  if (root)  {
+    hydrateRoot(root, main);
+  }
 });

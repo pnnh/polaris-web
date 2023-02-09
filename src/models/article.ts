@@ -1,3 +1,4 @@
+import { RestfulAddress } from "@/utils/config";
 import axios from "axios";
 import { CommonReslut } from "./common-result";
 
@@ -14,12 +15,12 @@ export class ArticleModel {
 }
 
 export async function selectArticleModels(): Promise<ArticleModel[]> {
-    const response = await axios.get<CommonReslut<ArticleModel[]>>('http://127.0.0.1:8101/article/select');
+    const response = await axios.get<CommonReslut<ArticleModel[]>>(RestfulAddress.ArticleService + '/restful/article/select');
     return response.data.data;
 }
 
 export async function getArticleModel(pk: string): Promise<ArticleModel> {
-    const response = await axios.get<CommonReslut<ArticleModel>>('http://127.0.0.1:8101/article/get', { params: { pk: pk } });
+    const response = await axios.get<CommonReslut<ArticleModel>>(RestfulAddress.ArticleService + '/restful/article/get', { params: { pk: pk } });
     return response.data.data;
 }
 
