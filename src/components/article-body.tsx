@@ -1,8 +1,8 @@
 'use client';
 
 import { TocItem } from '@/models/article';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-
+import Highlight, { defaultProps, Language, Language } from 'prism-react-renderer';
+import github from 'prism-react-renderer/themes/github';
 
 
 export function BuildBodyHtml(props: { tocList: Array<TocItem>, node: any }) {
@@ -40,7 +40,7 @@ function buildParagraph(tocList: Array<TocItem>, node: any) {
     var children = node["children"] as Array<object>;
     if (!children || children.length < 1) return <p></p>;
 
-    return <p>
+    return <p className='paragraph'>
         {children.map((child) => {
             return buildText(child)
         })}
@@ -73,20 +73,11 @@ function buildHeader(tocList: Array<TocItem>, node: any) {
 
 
 export function buildCodeBlock(tocList: Array<TocItem>, node: any) {
-    var language = node["language"] as string;
+    var language = node["language"] as Language;
     var children = node["children"] as Array<object>;
     var codeText = children.map((child) => buildText(child)).join("");
-
-    const exampleCode = `
-(function someDemo() {
-  var test = "Hello World!";
-  console.log(test);
-})();
-
-return () => <App />;
-`;
-    //return <code>{codeText}</code>
-    return <Highlight {...defaultProps} code={exampleCode} language="jsx">
+  
+    return <Highlight {...defaultProps} theme={github} code={codeText} language={language}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
 
             <pre className={className} style={style}>

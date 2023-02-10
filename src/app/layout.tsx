@@ -1,4 +1,5 @@
 import './global.css'
+import styles from './layout.module.css'
 
 export default function RootLayout({
   children,
@@ -20,25 +21,21 @@ export default function RootLayout({
         <link type="text/css" rel="stylesheet" href="/src/client/index.scss"></link>
       </head>
       <body>
-        <header className="nav-header">
-          <div className="fx-grid">
-            <div className="ms-Grid-row header-row">
-              <div className="ms-Grid-col ms-xl8 header-left">
-                <div className="menu">
-                  <a className="link" href='/'>首页</a>&nbsp;
-                  <a className="link" href='/'>文章</a>
-                </div>
-              </div>
-              <div className="ms-Grid-col ms-xl4 header-right">
-              </div>
-            </div>
-          </div>
-          <div className="ms-Grid-col ms-sm0 ms-xl2">
-          </div>
+        <header className={styles.navHeader}>
+          <NavHeader />
         </header>
         <main>{children}</main>
         <script type='module' src='/src/client/index.tsx'></script>
       </body>
     </html>
   )
+}
+
+function NavHeader() {
+  return <div className={styles.headerRow}>
+    <div>
+      <a className={styles.navLink} href='/'>首页</a>&nbsp;
+      <a className={styles.navLink} href='/'>文章</a>
+    </div>
+  </div>
 }
