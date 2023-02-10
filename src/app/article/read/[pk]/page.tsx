@@ -4,6 +4,7 @@ import React from "react";
 import { ArticleModel, getArticleModel, TocItem } from "@/models/article";
 import { marked } from "marked";
 import { BuildBodyHtml } from '@/components/article-body';
+import { markdownToStele } from '@/utils/markdown';
 
 
 export async function LoadArticleReadPage(pk: string) {
@@ -20,29 +21,22 @@ async function renderArticle(article: ArticleModel) {
 
     let tocList: TocItem[] = [];
     tocList.push({ title: article.title, header: 0 });
+    let bodyObject: any;
     if (article.header == 'stele') {
-        var bodyObject = JSON.parse(article.body);
-
-        return <div className={styles.articleInfo}>
-            <div className={styles.articleTitle}>{article.title}</div>
-            <div>
-                <div className={styles.articleBody}>
-                    <BuildBodyHtml tocList={tocList} node={bodyObject} />
-                </div>
-            </div>
-        </div>
-
+        bodyObject = JSON.parse(article.body);
     } else if (article.header == 'markdown') {
-        let bodyHtml = marked.parse(article.body);
-        return <div className={styles.articleInfo}>
-            <div>{article.title}</div>
-            <div>
-                <div className={styles.articleBody} dangerouslySetInnerHTML={{ __html: bodyHtml }} ></div>
-            </div>
-        </div>
-    } else {
+        bodyObject = markdownToStele(article.body);
+    }
+    if (!bodyObject) {
         return <div>暂不支持的文章类型</div>
     }
+
+    return <div className={styles.articleInfo}>
+        <div className={styles.articleTitle}>{article.title}</div>
+        <div className={styles.articleBody}>
+            <BuildBodyHtml tocList={tocList} node={bodyObject} />
+        </div>
+    </div>
 }
 
 

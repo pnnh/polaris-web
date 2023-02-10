@@ -13,8 +13,8 @@ export async function LoadHomePage() {
 export async function LoadPictureList() {
   const models = await selectArticleModels()
 
-  return <div className="fx-grid">
-    <div className="ms-Grid-col ms-sm12 ms-xl8">
+  return <div>
+    <div>
       <div className={styles.articleList}>
         {models.map((model) => {
           return <PictureItem key={model.pk} model={model} />
@@ -28,17 +28,13 @@ export async function LoadPictureList() {
 
 function PictureItem(props: { model: ArticleModel }) {
 
-  return <div className="article-item">
+  return <div className={styles.articleItem}>
     <div>
-      <div className="article-link">
-        <a href={"/article/read/" + props.model.pk}>{props.model.title}</a>
+      <div className={styles.articleTitle}>
+        <a className={styles.articleLink} href={"/article/read/" + props.model.pk}>{props.model.title}</a>
       </div>
-      <div className="article-description">
+      <div className={styles.articleDescription}>
         {props.model.description}
-      </div>
-      <div className="article-info">
-        <span className="update-time"><i className="ri-time-line"></i></span>
-        <span className="views"><i className="ri-eye-line"></i></span>
       </div>
     </div>
   </div>

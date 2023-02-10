@@ -1,9 +1,10 @@
 'use client';
 
 import { TocItem } from '@/models/article';
-import Highlight, { defaultProps, Language, Language } from 'prism-react-renderer';
+import { generatorRandomString } from '@/utils/helpers';
+import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import github from 'prism-react-renderer/themes/github';
-
+import styled, { css } from 'styled-components';
 
 export function BuildBodyHtml(props: { tocList: Array<TocItem>, node: any }) {
 
@@ -11,17 +12,16 @@ export function BuildBodyHtml(props: { tocList: Array<TocItem>, node: any }) {
     var children = props.node["children"] as Array<object>;
     if (!children || children.length < 1) return <></>;
 
-
     return <div>
         {
-            children.map((child) => {
-                return buildNode(props.tocList, child);
+            children.map((child, index) => {
+                return <div key={index}>{buildNode(props.tocList, child, index.toString())}</div>
             })
         }
     </div>;
 }
 
-function buildNode(tocList: Array<TocItem>, node: any) {
+function buildNode(tocList: Array<TocItem>, node: any, nodeKey: string) {
     if (!node) return <></>;
     var name = node["name"] as string;
     switch (name) {
@@ -30,7 +30,7 @@ function buildNode(tocList: Array<TocItem>, node: any) {
         case "header":
             return buildHeader(tocList, node);
         case "code-block":
-            return buildCodeBlock(tocList, node);
+            return buildCodeBlock(tocList, node, nodeKey);
     }
     return <></>;
 }
@@ -41,8 +41,8 @@ function buildParagraph(tocList: Array<TocItem>, node: any) {
     if (!children || children.length < 1) return <p></p>;
 
     return <p className='paragraph'>
-        {children.map((child) => {
-            return buildText(child)
+        {children.map((child, index) => {
+            return <span key={index}>{buildText(child)}</span>
         })}
     </p>;
 }
@@ -72,25 +72,30 @@ function buildHeader(tocList: Array<TocItem>, node: any) {
 }
 
 
-export function buildCodeBlock(tocList: Array<TocItem>, node: any) {
+export function buildCodeBlock(tocList: Array<TocItem>, node: any, nodeKey: string) {
     var language = node["language"] as Language;
     var children = node["children"] as Array<object>;
     var codeText = children.map((child) => buildText(child)).join("");
-  
-    return <Highlight {...defaultProps} theme={github} code={codeText} language={language}>
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
 
-            <pre className={className} style={style}>
-                {tokens.map((line, i) => (
-                    <div {...getLineProps({ line, key: i })}>
+    return <Highlight {...defaultProps} theme={github} code={codeText} language={language}>
+        {({ className, style, tokens, getLineProps, getTokenProps }) => {
+            // todo 加入以下两行会导致客户端和服务器渲染不一致从而出错，需要解决
+            // style['padding'] = '8px';
+            // style['white-space'] = 'pre-line';
+
+            return <pre className={className} style={style}>
+                {tokens.map((line, i) => {
+                    return <div {...getLineProps({ line, key: i })} key={nodeKey + "_" + i.toString()} >
+
                         {line.map((token, key) => (
-                            <span {...getTokenProps({ token, key })} />
+                            <span {...getTokenProps({ token, key })} key={key} />
                         ))}
                     </div>
-                ))}
+                })}
             </pre>
-        )}
-    </Highlight>
+        }
+        }
+    </Highlight >
 
 }
 
