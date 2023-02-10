@@ -1,4 +1,3 @@
-
 .articleList {
   background: #FFFFFF;
   margin: 0 auto 24px;
@@ -10,11 +9,12 @@
 .articleItem {
   border-bottom: 1px solid #e5e6eb;
   padding-bottom: 16px;
-  
+
 }
+
 .articleItem:last-child {
-    border-bottom-width: 0;
-} 
+  border-bottom-width: 0;
+}
 
 
 .articleTitle {
@@ -34,4 +34,36 @@
   font-size: 14px;
   line-height: 22px;
   margin-bottom: 8px;
-} 
+}
+
+.pageList {
+  display: flex;
+  justify-content: start;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  background-color: #FFFFFF;
+  padding: 8px;
+}
+
+.pageItem {
+  display: inline-block;
+  padding: 8px;
+  margin-right: 4px;
+  min-width: 16px;
+  text-decoration: none;
+  text-align: center;
+  color: #000000;
+}
+
+.pageItemActive {
+  background-color: rgba(42, 142, 224, 0.84);
+  color: #FFFFFF;
+  display: inline-block;
+  padding: 8px;
+  margin-right: 4px;
+  min-width: 16px;
+  text-decoration: none;
+  text-align: center;
+  color: #FFFFFF;
+}

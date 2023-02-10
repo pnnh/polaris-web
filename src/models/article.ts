@@ -14,8 +14,18 @@ export class ArticleModel {
     description: string = "";
 }
 
-export async function selectArticleModels(): Promise<ArticleModel[]> {
-    const response = await axios.get<CommonReslut<ArticleModel[]>>(RestfulAddress.ArticleService + '/restful/article/select');
+export class selectResultModel {
+    count: number = 0;
+    list: ArticleModel[] = [];
+}
+
+export async function selectArticleModels(page: number, size: number): Promise<selectResultModel> {
+    let offset = (page - 1) * size;
+    if (offset < 0) {
+        offset = 0;
+    }
+    const response = await axios.get<CommonReslut<selectResultModel>>(RestfulAddress.ArticleService + '/restful/article/select',
+        { params: { offset: offset, size: size } });
     return response.data.data;
 }
 
