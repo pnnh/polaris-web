@@ -1,9 +1,0 @@
-{
-  "cSpell.words": [
-    "esbuild",
-    "iife",
-    "middlewares"
-  ],
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
-}
