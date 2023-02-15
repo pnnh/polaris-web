@@ -38,7 +38,7 @@
 
 .pageList {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin: 0 auto;
   padding: 0;
   list-style: none;

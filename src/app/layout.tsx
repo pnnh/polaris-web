@@ -1,7 +1,7 @@
 import './global.css'
 import styles from './layout.module.css'
 
-export default function RootLayout({
+export default function RootLayout ({
   children,
 }: {
   children: React.ReactNode
@@ -31,7 +31,7 @@ export default function RootLayout({
   )
 }
 
-function NavHeader() {
+function NavHeader () {
   return <div className={styles.headerRow}>
     <div>
       <a className={styles.navLink} href='/'>首页</a>&nbsp;

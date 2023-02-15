@@ -8,7 +8,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'standard',
-    "next/core-web-vitals"
+    'next',
+    'next/core-web-vitals'
   ],
   globals: {
     React: 'readonly',
@@ -39,6 +40,7 @@ module.exports = {
     'space-infix-ops': 'off',
     'no-multiple-empty-lines': 'off',
     'spaced-comment': 'off',
-    'comma-dangle': 'off'
+    'comma-dangle': 'off',
+    '@next/next/no-html-link-for-pages': 'off'
   }
 }

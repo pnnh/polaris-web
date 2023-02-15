@@ -1,6 +1,6 @@
 
 export class CommonReslut<T> {
-    code: number = 0;
-    message: string = "";
-    data: T = {} as T;
+  code = 0
+  message = ''
+  data: T = {} as T
 }

@@ -18,3 +18,5 @@ gen/
 next-env.d.ts
 npm-debug.log*
 /out/
+.vscode/
+docker/build/
