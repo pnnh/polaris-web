@@ -1,5 +1,9 @@
+import Link from 'next/link'
 import './global.css'
 import styles from './layout.module.css'
+
+// 隔几秒重新验证下数据
+export const revalidate = 10
 
 export default function RootLayout ({
   children,
@@ -34,8 +38,8 @@ export default function RootLayout ({
 function NavHeader () {
   return <div className={styles.headerRow}>
     <div>
-      <a className={styles.navLink} href='/'>首页</a>&nbsp;
-      <a className={styles.navLink} href='/'>文章</a>
+      <Link className={styles.navLink} href='/'>首页</Link>&nbsp;
+      <Link className={styles.navLink} href='/'>文章</Link>
     </div>
   </div>
 }

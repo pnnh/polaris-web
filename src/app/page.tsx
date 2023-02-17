@@ -2,6 +2,7 @@ import React from 'react'
 import { selectArticleModels, ArticleModel } from '@/models/article'
 import styles from './page.module.css'
 import { calcPagination } from '@/utils/helpers'
+import Link from 'next/link'
 
 export async function LoadPictureList (page = 1) {
   const pageSize = 8
@@ -18,18 +19,18 @@ export async function LoadPictureList (page = 1) {
       </div>
       <div className={styles.pageList}>
         {pagination.previousPage >= 1
-          ? (<a href={'/' + pagination.previousPage}
-          className={styles.pageItem}>上一页</a>)
+          ? (<Link href={'/' + pagination.previousPage}
+          className={styles.pageItem}>上一页</Link>)
           : (<></>)}
         {[...Array(pagination.endPage - pagination.startPage + 1).keys()].map((_, index) => {
-          return <a key={index} href={'/' + (pagination.startPage + index)}
+          return <Link key={index} href={'/' + (pagination.startPage + index)}
             className={pagination.currentPage === pagination.startPage + index
               ? styles.pageItemActive
-              : styles.pageItem}>{pagination.startPage + index}</a>
+              : styles.pageItem}>{pagination.startPage + index}</Link>
         })}
         {pagination.nextPage <= pagination.maxPage
-          ? (<a href={'/' + pagination.nextPage}
-          className={styles.pageItem}>下一页</a>)
+          ? (<Link href={'/' + pagination.nextPage}
+          className={styles.pageItem}>下一页</Link>)
           : (<></>)}
       </div>
     </div>
@@ -40,8 +41,8 @@ export function PictureItem (props: { model: ArticleModel }) {
 
   return <div className={styles.articleItem}>
     <div>
-      <div className={styles.articleTitle}>
-        <a className={styles.articleLink} href={'/article/read/' + props.model.pk}>{props.model.title}</a>
+      <div className={styles.articleTitle}> 
+        <Link className={styles.articleLink} href={'/article/read/' + props.model.pk}>{props.model.title}</Link>
       </div>
       <div className={styles.articleDescription}>
         {props.model.description}
