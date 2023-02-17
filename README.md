@@ -24,4 +24,13 @@ npm install # 安装依赖包
 
 ```bash
 sudo docker build -t polaris-cloud .
+
+# 本地测试运行容器
+sudo docker run --env-file debug/.env -p 8100:8100 polaris-cloud
+
+# 镜像打标签
+sudo docker tag polaris-cloud:latest elarry/polaris-cloud:v0.1.0
+
+# 推送镜像（需要先登录）
+sudo docker push elarry/polaris-cloud:v0.1.0
 ```

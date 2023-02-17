@@ -7,7 +7,7 @@ export async function LoadPictureList (page = 1) {
   const pageSize = 8
   const result = await selectArticleModels(page, pageSize)
   const pagination = calcPagination(page, result.count, pageSize)
-  console.debug('pagination', pagination)
+  
   return <div>
     <div>
       <div className={styles.articleList}>
