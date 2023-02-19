@@ -1,3 +1,4 @@
+import { UserNav } from '@/components/user'
 import Link from 'next/link'
 import './global.css'
 import styles from './layout.module.css'
@@ -37,9 +38,14 @@ export default function RootLayout ({
 
 function NavHeader () {
   return <div className={styles.headerRow}>
-    <div>
-      <Link className={styles.navLink} href='/'>首页</Link>&nbsp;
-      <Link className={styles.navLink} href='/'>文章</Link>
+    <div className={styles.headerMenu}>
+      <div className={styles.headerLeft}>
+        <Link className={styles.navLink} href='/'>首页</Link>&nbsp;
+        <Link className={styles.navLink} href='/'>文章</Link>
+      </div>
+      <div className={styles.headerRight}>
+        <UserNav />
+      </div>
     </div>
   </div>
 }

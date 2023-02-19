@@ -1,9 +1,10 @@
+.articleContainer {}
+
 .articleList {
+  padding: 0 16px 0 16px;
   background: #FFFFFF;
   margin: 0 auto 24px;
-  padding: 16px;
   border-radius: 4px;
-  box-shadow: #f4f4f4;
 }
 
 .articleItem {

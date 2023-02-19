@@ -1,6 +1,6 @@
 FROM node
 
-ENV NODE_ENV production
+ENV NEXT_PUBLIC_ENV production
 ENV PORT 8100
 
 # 指定RUN工作目录

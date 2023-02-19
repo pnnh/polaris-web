@@ -2,14 +2,19 @@
 export class RestfulAddress {
   static get ArticleService () {
     if (isNodejs()) {
-      const serverUrl = process.env.SERVER
-      if (serverUrl) {
-        return serverUrl
-      }
-      return 'http://127.0.0.1:8101'
+      return process.env.SERVER
     }
     return ''
   }
+
+  static get AuthUrl () {
+    // multiverse授权登录服务地址
+    return process.env.NEXT_PUBLIC_LOGIN_URL
+  }
+}
+
+export function isDev () {
+  return process.env.NEXT_PUBLIC_ENV === 'development'
 }
 
 export function isNodejs () {

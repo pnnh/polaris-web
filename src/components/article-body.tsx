@@ -78,10 +78,6 @@ export function buildCodeBlock (tocList: Array<TocItem>, node: CodeBlockNode, no
 
   return <Highlight {...defaultProps} theme={github} code={codeText} language={language}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => {
-          // todo 加入以下两行会导致客户端和服务器渲染不一致从而出错，需要解决
-          // style['padding'] = '8px';
-          // style['white-space'] = 'pre-line';
-
           return <pre className={className} style={style}>
                 {tokens.map((line, i) => {
                   return <div {...getLineProps({ line, key: i })} key={nodeKey + '_' + i.toString()} >

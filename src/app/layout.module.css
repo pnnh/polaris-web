@@ -5,8 +5,6 @@
 }
 
 .headerRow {
-  width: 1024px;
-  margin: 0 auto;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,7 +12,22 @@
   justify-content: space-between;
 
 }
-  
+
+@media screen and (min-width: 1024px) {
+  .headerRow {
+    width: 1024px;
+    margin: 0 auto;
+  }
+}
+
+.headerMenu {
+  margin-left: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: auto;
+}
+
 .navLink {
   color: #000;
   font-size: 18px;

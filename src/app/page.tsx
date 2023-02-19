@@ -9,8 +9,7 @@ export async function LoadPictureList (page = 1) {
   const result = await selectArticleModels(page, pageSize)
   const pagination = calcPagination(page, result.count, pageSize)
   
-  return <div>
-    <div>
+  return <div className={styles.articleContainer}>
       <div className={styles.articleList}>
         {result.list.map((model) => {
           return <PictureItem key={model.pk} model={model} />
@@ -34,7 +33,6 @@ export async function LoadPictureList (page = 1) {
           : (<></>)}
       </div>
     </div>
-  </div>
 }
 
 export function PictureItem (props: { model: ArticleModel }) {
@@ -53,7 +51,5 @@ export function PictureItem (props: { model: ArticleModel }) {
 
 export default async function Home () {
   const piclist = await LoadPictureList()
-  return <div>
-    {piclist}
-  </div>
+  return piclist
 }
