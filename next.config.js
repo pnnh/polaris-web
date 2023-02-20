@@ -12,8 +12,8 @@ const nextConfig = {
   async rewrites () { 
     return [
       {
-        source: '/restful/:path*',
-        destination: serverUrl + '/restful/:path*',
+        source: '/server/:path*',
+        destination: serverUrl + '/server/:path*',
       },
     ]
   },
