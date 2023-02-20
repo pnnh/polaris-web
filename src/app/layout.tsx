@@ -6,11 +6,12 @@ import styles from './layout.module.css'
 // 隔几秒重新验证下数据
 export const revalidate = 10
 
-export default function RootLayout ({
+export default async function RootLayout ({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const headerNav = await loadHeaderNav()
   return (
     <html>
       <head>
@@ -26,7 +27,7 @@ export default function RootLayout ({
       </head>
       <body>
         <header className={styles.navHeader}>
-          <NavHeader />
+          {headerNav}
         </header>
         <main>{children}</main>
         <footer>
@@ -36,7 +37,7 @@ export default function RootLayout ({
   )
 }
 
-function NavHeader () {
+async function loadHeaderNav () { 
   return <div className={styles.headerRow}>
     <div className={styles.headerMenu}>
       <div className={styles.headerLeft}>
@@ -44,7 +45,7 @@ function NavHeader () {
         <Link className={styles.navLink} href='/'>文章</Link>
       </div>
       <div className={styles.headerRight}>
-        <UserNav />
+        <UserNav/>
       </div>
     </div>
   </div>
