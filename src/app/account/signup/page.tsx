@@ -1,17 +1,13 @@
 'use client'
 
 import { coerceToArrayBuffer, coerceToBase64Url } from '@/utils/webauthn'
-import React, { useState } from 'react' 
-import { Button, makeStyles } from '@fluentui/react-components'
-
-const useStyles = makeStyles({
-  root: { color: 'white' },
-})
+import { Button } from '@mui/material'
+import React, { useState } from 'react'  
+ 
 
 export default function Home () {
   const [username, setUsername] = useState('')
-  const [displayName, setDisplayName] = useState('')
-  const classes = useStyles()
+  const [displayName, setDisplayName] = useState('') 
   return <div>
         <h1>注册页面</h1>
         <div className="section">
@@ -45,16 +41,10 @@ export default function Home () {
                         </div>
                     </div>
 
-                    <div className="field">
-                        <div className="control">
-                            <button className="button is-link" onClick={(event) => {
-                              handleRegisterSubmit(username, displayName)
-                            }}>Register user</button>
-                        </div>
-                        <Button appearance="primary" className={classes.root}
-                        onClick={()=>{
-                          console.log('You clicked me!')
-                        }}>I am a button.</Button>
+                    <div className="field"> 
+                        <Button variant="contained" onClick={(event) => {
+                          handleRegisterSubmit(username, displayName)
+                        }}>注册用户</Button>
                     </div> 
             </div> 
         </div>

@@ -1,8 +1,9 @@
 'use client'
 
-import { coerceToBase64Url } from '@/utils/webauthn'
-import Link from 'next/link'
+import { coerceToBase64Url } from '@/utils/webauthn' 
 import React, { useState } from 'react' 
+import Button from '@mui/material/Button'
+import { TextField, Link } from '@mui/material'
 
 export default function Home () {
   const [username, setUsername] = useState('')
@@ -13,13 +14,12 @@ export default function Home () {
         <div className="columns">  
             <div className="column is-4">
   
-                    <div className="field">
-                        <label className="label">Username</label>
-                        <div className="control has-icons-left has-icons-right">
-                            <input className="input" type="text" placeholder="abergs" name="username" id="login-username" required 
+                    <div className="field"> 
+                        <div className="control has-icons-left has-icons-right"> 
+                                <TextField label="用户名" variant="outlined"
                                 value={username} onChange={(event) => {
                                   setUsername(event.target.value)
-                                }}/>
+                                }} />
                             <span className="icon is-small is-left">
                                 <i className="fas fa-user"></i>
                             </span>
@@ -28,24 +28,25 @@ export default function Home () {
 
                     <div className="field">
                         <div className="control">
-                            <button className="button is-link" onClick={()=> {
-                              handleSignInSubmit(username)
-                            }}>Sign in</button>
-                        </div>
+                           <Button variant="contained" onClick={()=> {
+                             handleSignInSubmit(username)
+                           }}>登录</Button>
+                        </div> 
                     </div> 
+
             </div>
         </div>
     </div>
 </div>
 <div>
     <LoginByMultiverse/>
-</div>
+</div> 
     </div>
 }
 
 function LoginByMultiverse () {
   const authUrl = 'https://debug.multiverse.direct/server/oauth2/auth?client_id=pwa&redirect_uri=https%3A%2F%2Fdebug.polaris.direct%2Fserver%2Foauth2%2Fcode&response_type=code&scope=openid&state=some-random-state-foobar&nonce=some-random-nonce'
-  return <Link href={authUrl}>通过Multiverse登录</Link>
+  return <Link href={authUrl}>通过Multiverse登录</Link> 
 }
 
 //document.getElementById('signin').addEventListener('submit', handleSignInSubmit);

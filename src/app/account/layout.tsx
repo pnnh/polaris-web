@@ -1,7 +1,6 @@
 'use client'
 
-import React from 'react';
-import { FluentProvider, teamsLightTheme  } from '@fluentui/react-components';
+import React from 'react' 
 
 
 export default function AccountLayout ({
@@ -9,10 +8,9 @@ export default function AccountLayout ({
 }: {
   children: React.ReactNode
 }) { 
-  return (
-     
-     <FluentProvider theme={teamsLightTheme}>
-     {children} 
-   </FluentProvider>
+  return ( 
+    <div className='account-page'>
+     {children}  
+    </div>
   )
 } 
