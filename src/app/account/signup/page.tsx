@@ -2,10 +2,16 @@
 
 import { coerceToArrayBuffer, coerceToBase64Url } from '@/utils/webauthn'
 import React, { useState } from 'react' 
+import { Button, makeStyles } from '@fluentui/react-components'
+
+const useStyles = makeStyles({
+  root: { color: 'white' },
+})
 
 export default function Home () {
   const [username, setUsername] = useState('')
   const [displayName, setDisplayName] = useState('')
+  const classes = useStyles()
   return <div>
         <h1>注册页面</h1>
         <div className="section">
@@ -45,12 +51,16 @@ export default function Home () {
                               handleRegisterSubmit(username, displayName)
                             }}>Register user</button>
                         </div>
+                        <Button appearance="primary" className={classes.root}
+                        onClick={()=>{
+                          console.log('You clicked me!')
+                        }}>I am a button.</Button>
                     </div> 
             </div> 
         </div>
     </div>
 </div>
-        
+         
     </div>
 }
 
@@ -61,15 +71,15 @@ export default function Home () {
 async function handleRegisterSubmit (username: string, displayName: string) { 
 
   // possible values: none, direct, indirect
-  const attestation_type = 'none'
+  const attestationType = 'none'
   // possible values: <empty>, platform, cross-platform
-  const authenticator_attachment = ''
+  const authenticatorAttachment = ''
 
   // possible values: preferred, required, discouraged
-  const user_verification = 'preferred'
+  const userVerification = 'preferred'
 
   // possible values: true,false
-  const require_resident_key = 'false'
+  const requireResidentKey = 'false'
 
 
 
@@ -77,10 +87,10 @@ async function handleRegisterSubmit (username: string, displayName: string) {
   const data = new FormData()
   data.append('username', username)
   data.append('displayName', displayName)
-  data.append('attType', attestation_type)
-  data.append('authType', authenticator_attachment)
-  data.append('userVerification', user_verification)
-  data.append('requireResidentKey', require_resident_key)
+  data.append('attType', attestationType)
+  data.append('authType', authenticatorAttachment)
+  data.append('userVerification', userVerification)
+  data.append('requireResidentKey', requireResidentKey)
 
   // send to server for registering
   let makeCredentialOptions

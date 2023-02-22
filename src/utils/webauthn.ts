@@ -1,4 +1,4 @@
-export function coerceToArrayBuffer(thing, name) {
+export function coerceToArrayBuffer(thing: string, name: string = '') {
   if (typeof thing === 'string') {
     // base64url to base64
     thing = thing.replace(/-/g, '+').replace(/_/g, '/')
