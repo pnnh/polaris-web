@@ -26,9 +26,10 @@ export default async function RootLayout ({
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
       </head>
       <body>
-        <header className={styles.navHeader}>
+        <header></header>
+        <nav className={styles.navHeader}>
           {headerNav}
-        </header>
+        </nav>
         <main>{children}</main>
         <footer>
         </footer>

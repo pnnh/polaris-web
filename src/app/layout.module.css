@@ -2,6 +2,10 @@
   background: #FFFFFF;
   border-bottom: solid 1px #f1f1f1;
   margin-bottom: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: opacity 0.3s ease-out 0s, transform 0.3s ease-out 0s;
+  opacity: 1;
+  transform: translateY(0px);
 }
 
 .headerRow {
@@ -26,6 +30,7 @@
   flex-direction: row;
   justify-content: space-between;
   flex: auto;
+  align-items: center;
 }
 
 .navLink {

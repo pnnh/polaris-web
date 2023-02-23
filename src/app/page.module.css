@@ -2,15 +2,20 @@
 
 .articleList {
   padding: 0 16px 0 16px;
-  background: #FFFFFF;
   margin: 0 auto 24px;
-  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .articleItem {
   border-bottom: 1px solid #e5e6eb;
   padding-bottom: 16px;
 
+}
+
+.articleContent {
+  margin: 1rem 1rem 0 1rem;
 }
 
 .articleItem:last-child {
@@ -43,8 +48,11 @@
   margin: 0 auto;
   padding: 0;
   list-style: none;
-  background-color: #FFFFFF;
-  padding: 8px;
+  padding: 0 16px 0 16px;
+}
+
+.pageContent {
+  margin: 0.5rem;
 }
 
 .pageItem {

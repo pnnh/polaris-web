@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react' 
 import Link from 'next/link'
 import { checkLogined, UserModel } from '@/models/account'
+import styles from './user.module.css'
+import { PSLinkButton } from './controls'
 
 export function UserNav () {
   const [user, setUser] = useState<UserModel>()
@@ -15,5 +17,5 @@ export function UserNav () {
   if (user && user.nickname !== '') { 
     return <div>欢迎：{user.nickname}</div>
   }
-  return <Link href={'/account/signin'}>登录</Link>
+  return <PSLinkButton href={'/account/signin'} className={styles.loginLink}>登录</PSLinkButton>
 }
