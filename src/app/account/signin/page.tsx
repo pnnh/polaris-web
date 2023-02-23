@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import Button from '@mui/material/Button'
 import { TextField, Link } from '@mui/material'
 import styles from './page.module.css'
-import { PSCard } from '@/components/controls'
+import { PSCard } from '@/components/client/controls'
 
 export default function Home () {
   const [username, setUsername] = useState('')

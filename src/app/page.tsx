@@ -3,8 +3,8 @@ import { selectArticleModels, ArticleModel } from '@/models/article'
 import styles from './page.module.css'
 import { calcPagination } from '@/utils/helpers'
 import Link from 'next/link'
-import { PSButton, PSCard } from '@/components/controls'
-import { Button } from '@mui/material'
+import { PSButton, PSCard } from '@/components/client/controls' 
+import { loadHeaderNav } from '@/components/nav'
 
 export async function LoadPictureList (page = 1) {
   const pageSize = 8
@@ -42,10 +42,11 @@ export async function LoadPictureList (page = 1) {
 }
 
 export function ArticleItem (props: { model: ArticleModel }) {
+  const readUrl = '/article/read/' + props.model.pk
   return <PSCard className={styles.articleItem}>
     <article className={styles.articleContent}>
       <h1 className={styles.articleTitle}> 
-        <Link className={styles.articleLink} href={'/article/read/' + props.model.pk}>{props.model.title}</Link>
+        <Link className={styles.articleLink} href={readUrl}>{props.model.title}</Link>
       </h1>
       <div className={styles.articleDescription}>
         {props.model.description}
@@ -59,5 +60,10 @@ export function ArticleItem (props: { model: ArticleModel }) {
 
 export default async function Home () {
   const piclist = await LoadPictureList()
-  return piclist
+  const headerNav = await loadHeaderNav()
+  return <>
+        {headerNav}
+        <main>{piclist}</main> 
+        <footer></footer>
+  </>
 }

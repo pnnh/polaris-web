@@ -2,7 +2,7 @@
 import styles from './page.module.css'
 import React from 'react'
 import { ArticleModel, getArticleModel, TocItem } from '@/models/article' 
-import { BuildBodyHtml } from '@/components/article-body'
+import { BuildBodyHtml } from '@/components/client/article-body'
 import { markdownToStele } from '@/utils/markdown'
 import { SteleBody } from '@/models/stele'
 
