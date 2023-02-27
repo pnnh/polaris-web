@@ -1,7 +1,6 @@
 .navHeader {
     background: #FFFFFF;
     border-bottom: solid 1px #f1f1f1;
-    margin-bottom: 24px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     transition: opacity 0.3s ease-out 0s, transform 0.3s ease-out 0s;
     opacity: 1;
@@ -32,4 +31,21 @@
     font-weight: 400;
     text-decoration: none;
     margin-right: 4px;
+}
+
+
+.navContainer {
+    padding: 8px;
+}
+
+.navTitle {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.navMenu {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }

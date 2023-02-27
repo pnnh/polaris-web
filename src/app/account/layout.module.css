@@ -1,0 +1,7 @@
+
+@media screen and (min-width: 1024px) {
+    .accountPage {
+        width: 1024px;
+        margin: 0 auto;
+    }
+}

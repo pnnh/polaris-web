@@ -26,11 +26,4 @@ footer {
     height: 56px;
 }
 
-@media screen and (min-width: 1024px) {
-    main {
-        width: 1024px;
-        margin: 0 auto;
-    }
-}
-
 @import url('../styles/highlight.css');

@@ -63,7 +63,7 @@ export default async function Home () {
   const headerNav = await loadHeaderNav()
   return <>
         {headerNav}
-        <main>{piclist}</main> 
+        <main className={styles.indexPage}>{piclist}</main> 
         <footer></footer>
   </>
 }

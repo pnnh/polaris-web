@@ -1,0 +1,10 @@
+
+
+.pageContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.leftNav {
+    width: 240px; 
+}
