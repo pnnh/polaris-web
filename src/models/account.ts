@@ -7,6 +7,6 @@ export class UserModel {
 }
 
 export async function checkLogined (): Promise<UserModel> {
-  const response = await axios.get<CommonReslut<UserModel>>(RestfulAddress.ArticleService + '/server/account/logined')
+  const response = await axios.get<CommonReslut<UserModel>>(RestfulAddress.ArticleService + '/restful/account/logined')
   return response.data.data
 }

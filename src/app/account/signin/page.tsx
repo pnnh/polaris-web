@@ -1,27 +1,19 @@
 'use client'
 
 import { coerceToBase64Url } from '@/utils/webauthn' 
-import React, { useState } from 'react' 
-import Button from '@mui/material/Button'
-import { TextField, Link } from '@mui/material'
+import React from 'react'  
 import styles from './page.module.css'
 import { PSCard } from '@/components/client/controls'
+import Link from 'next/link'
 
-export default function Home () {
-  const [username, setUsername] = useState('')
+export default function Home () { 
   return <PSCard>
     <div className={styles.loginContainer}>  
-            <div className={styles.selfBox}>   
-              <div className={styles.fieldsRow}>  
-                          <TextField label="请输入用户名" variant="outlined"
-                          value={username} onChange={(event) => {
-                            setUsername(event.target.value)
-                          }} />  
-              </div>
+            <div className={styles.selfBox}>
               <div className={styles.actionRow}>
-                  <Button variant="contained" onClick={()=> {
-                    handleSignInSubmit(username)
-                  }}>点击登录</Button>
+                <button onClick={()=> {
+                  handleSignInSubmit('')
+                }}>点击登录</button>
               </div>    
             </div> 
             <div className={styles.otherBox}>
@@ -44,7 +36,7 @@ async function handleSignInSubmit (username: string) {
   // send to server for registering
   let makeAssertionOptions
   try {
-    const res = await fetch('/server/assertionOptions', {
+    const res = await fetch('/restful/assertionOptions', {
       method: 'POST', // or 'PUT'
       body: formData, // data can be `string` or {object}!
       headers: {
@@ -105,9 +97,9 @@ async function handleSignInSubmit (username: string) {
 }
 
 /**
- * Sends the credential to the the FIDO2 server for assertion
- * @param {any} assertedCredential
- */
+* Sends the credential to the the FIDO2 server for assertion
+* @param {any} assertedCredential
+*/
 async function verifyAssertionWithServer (assertedCredential) {
 
   // Move data into Arrays incase it is super long
@@ -131,7 +123,7 @@ async function verifyAssertionWithServer (assertedCredential) {
 
   let response
   try {
-    const res = await fetch('/server/makeAssertion', {
+    const res = await fetch('/restful/makeAssertion', {
       method: 'POST', // or 'PUT'
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: {

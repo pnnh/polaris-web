@@ -24,13 +24,13 @@ export async function selectArticleModels (page: number, size: number): Promise<
   if (offset < 0) {
     offset = 0
   }
-  const response = await axios.get<CommonReslut<selectResultModel>>(RestfulAddress.ArticleService + '/server/article/select',
+  const response = await axios.get<CommonReslut<selectResultModel>>(RestfulAddress.ArticleService + '/article/select',
     { params: { offset, limit: size } })
   return response.data.data
 }
 
 export async function getArticleModel (pk: string): Promise<ArticleModel> {
-  const response = await axios.get<CommonReslut<ArticleModel>>(RestfulAddress.ArticleService + '/server/article/get', { params: { pk } })
+  const response = await axios.get<CommonReslut<ArticleModel>>(RestfulAddress.ArticleService + '/article/get', { params: { pk } })
   return response.data.data
 }
 

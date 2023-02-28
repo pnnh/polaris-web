@@ -1,12 +1,10 @@
 'use client'
 
-import { coerceToArrayBuffer, coerceToBase64Url } from '@/utils/webauthn'
-import { Button } from '@mui/material'
+import { coerceToArrayBuffer, coerceToBase64Url } from '@/utils/webauthn' 
 import React, { useState } from 'react'  
  
 
-export default function Home () {
-  const [username, setUsername] = useState('')
+export default function Home () { 
   const [displayName, setDisplayName] = useState('') 
   return <div>
         <h1>注册页面</h1>
@@ -14,20 +12,6 @@ export default function Home () {
     <div className="container">
         <div className="columns">
             <div className="column is-4">
-  
-                    <div className="field">
-                        <label className="label">Username</label>
-                        <div className="control has-icons-left has-icons-right">
-                            <input className="input" type="text" placeholder="abergs" name="username" required 
-                                 value={username} onChange={(event) => {
-                                   setUsername(event.target.value)
-                                 }}/>
-                            <span className="icon is-small is-left">
-                                <i className="fas fa-user"></i>
-                            </span>
-                        </div>
-                    </div>
-
                     <div className="field">
                         <label className="label">Display name</label>
                         <div className="control has-icons-left has-icons-right">
@@ -42,9 +26,9 @@ export default function Home () {
                     </div>
 
                     <div className="field"> 
-                        <Button variant="contained" onClick={(event) => {
-                          handleRegisterSubmit(username, displayName)
-                        }}>注册用户</Button>
+                        <button onClick={(event) => {
+                          handleRegisterSubmit('', displayName)
+                        }}>注册用户</button>
                     </div> 
             </div> 
         </div>
@@ -153,7 +137,7 @@ async function handleRegisterSubmit (username: string, displayName: string) {
 }
 
 async function fetchMakeCredentialOptions (formData) {
-  const response = await fetch('/server/makeCredentialOptions', {
+  const response = await fetch('/restful/makeCredentialOptions', {
     method: 'POST', // or 'PUT'
     body: formData, // data can be `string` or {object}!
     headers: {
@@ -215,7 +199,7 @@ async function registerNewCredential (newCredential: unknown) {
 }
 
 async function registerCredentialWithServer (formData: unknown) {
-  const response = await fetch('/server/makeCredential', {
+  const response = await fetch('/restful/makeCredential', {
     method: 'POST', // or 'PUT'
     body: JSON.stringify(formData), // data can be `string` or {object}!
     headers: {
