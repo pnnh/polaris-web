@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'  
-import { checkLogined, UserModel } from '@/models/account'
+import { checkLogined, UserModel } from '@/models/session'
 import styles from './user.module.css'
 import { PSLinkButton } from './controls'
 
