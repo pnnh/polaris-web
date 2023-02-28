@@ -4,7 +4,10 @@ import { coerceToArrayBuffer, coerceToBase64Url } from '@/utils/webauthn'
 //document.getElementById('register').addEventListener('submit', handleRegisterSubmit)
 
 export async function handleRegisterSubmit (username: string, displayName: string) { 
-
+  if (!username) {
+    console.error('Username is required')
+    return
+  }
   // possible values: none, direct, indirect
   const attestationType = 'none'
   // possible values: <empty>, platform, cross-platform
@@ -82,7 +85,6 @@ export async function handleRegisterSubmit (username: string, displayName: strin
     })
   } catch (e) {
     const msg = 'Could not create credentials in browser. Probably because the username is already registered with your authenticator. Please change username or authenticator.'
-    console.error(msg, e)
     console.error(msg, e)
   }
 
