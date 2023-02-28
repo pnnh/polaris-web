@@ -1,16 +1,25 @@
+import { checkAuth } from '@/services/auth'
 import React from 'react'   
 import styles from './layout.module.css'
 import { ConsoleLeftNav, ConsoleTopNav } from './nav'
  
 
-export default function ConsoleLayout ({
+export default async function ConsoleLayout ({
   children,
 }: {
   children: React.ReactNode
 }) {  
+
+  const auth = await checkAuth()
+  console.log('auth:', auth) 
+
+  if (!auth) {
+    return <div > 未登录
+    </div>
+  }
   return ( 
     <>
-    <ConsoleTopNav></ConsoleTopNav>
+    <ConsoleTopNav username={auth.username}></ConsoleTopNav>
         <main>
        
         <div className={styles.pageContainer}>

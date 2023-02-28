@@ -6,11 +6,12 @@ import axios from 'axios'
 import { CommonReslut } from './common-result'
 
 export class UserModel {
-  nickname = ''
+  username = ''
 }
 
-export async function checkLogined (): Promise<UserModel> {
-  const response = await axios.get<CommonReslut<UserModel>>(RestfulAddress.ArticleService + '/restful/session/logined')
+export async function tokenIntrospection (token: string): Promise<UserModel> {
+  const response = await axios.get<CommonReslut<UserModel>>(RestfulAddress.ArticleService + '/session/introspection',
+    {params: {token}})
   return response.data.data
 }
 

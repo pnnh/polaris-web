@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from './nav.module.css'
 
 
-export function ConsoleTopNav () { 
+export function ConsoleTopNav (props: { username: string }) { 
   return <nav className={styles.navHeader}> 
           <div className={styles.headerRow}>
           <div className={styles.headerMenu}>
@@ -12,7 +12,7 @@ export function ConsoleTopNav () {
               <Link className={styles.navLink} href='/'>首页</Link>
           </div>
           <div className={styles.headerRight}>
-              你好: 管理员
+              {'欢迎：' + props.username}
           </div>
           </div>
       </div>

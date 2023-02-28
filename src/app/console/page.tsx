@@ -1,12 +1,7 @@
- 
-import { cookies } from 'next/headers'
+import { checkAuth } from '@/services/auth'
 
-export default function Page () {
-  const cookieStore = cookies()
-  const session = cookieStore.get('session')
-  
-  console.log('session', session)
-  
+export default async function Page () {
+ 
   return <div > 控制台首页
   </div>
 }

@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import React, { MouseEventHandler } from 'react'  
 import styles from './controls.module.css'

@@ -40,3 +40,9 @@
     text-decoration: none;
     margin-right: 4px;
 }
+
+.loginLink {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
