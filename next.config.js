@@ -20,14 +20,14 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  async rewrites () { 
-    return [
-      {
-        source: '/restful/:path*',
-        destination: serverUrl + '/:path*',
-      },
-    ]
-  },
+  // async rewrites () { 
+  //   return [
+  //     {
+  //       source: '/restful/:path*',
+  //       destination: serverUrl + '/:path*',
+  //     },
+  //   ]
+  // },
 }
 
 module.exports = nextConfig
