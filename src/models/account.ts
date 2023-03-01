@@ -29,27 +29,18 @@ export async function handleRegisterSubmit (username: string, displayName: strin
   data.append('authType', authenticatorAttachment)
   data.append('userVerification', userVerification)
   data.append('requireResidentKey', requireResidentKey)
-
-  // send to server for registering
-  let makeCredentialOptions
-  try {
-    makeCredentialOptions = await fetchMakeCredentialOptions(data)
-
-  } catch (e) {
-    console.error(e)
-    const msg = "Something wen't really wrong"
-    console.error(msg)
-  }
-
-
-  console.log('Credential Options Object', makeCredentialOptions)
-
-  if (makeCredentialOptions.status !== 'ok') {
-    console.log('Error creating credential options')
-    console.log(makeCredentialOptions.errorMessage)
-    console.error(makeCredentialOptions.errorMessage)
+ 
+  const fetchResult = await fetchMakeCredentialOptions(data)
+ 
+  if (fetchResult.code !== 200 || !fetchResult.data || !fetchResult.data.options) {
+    console.log('Error creating credential options') 
+    console.error('fetchResult.message', fetchResult.message)
     return
   }
+
+  const makeCredentialOptions =fetchResult.data.options
+
+  console.log('Credential Options Object', makeCredentialOptions)
 
   // Turn the challenge back into the accepted format of padded base64
   makeCredentialOptions.challenge = coerceToArrayBuffer(makeCredentialOptions.challenge)
@@ -92,7 +83,7 @@ export async function handleRegisterSubmit (username: string, displayName: strin
   console.log('PublicKeyCredential Created', newCredential)
 
   try {
-    registerNewCredential(newCredential)
+    registerNewCredential(fetchResult.data.session, newCredential)
 
   } catch (e) {
     console.error(err.message ? err.message : err)
@@ -115,7 +106,7 @@ export async function fetchMakeCredentialOptions (formData) {
 
 
 // This should be used to verify the auth data with the server
-export async function registerNewCredential (newCredential: unknown) {
+export async function registerNewCredential (session: string, newCredential: unknown) {
   // Move data into Arrays incase it is super long
   const attestationObject = new Uint8Array(newCredential.response.attestationObject)
   const clientDataJSON = new Uint8Array(newCredential.response.clientDataJSON)
@@ -131,23 +122,22 @@ export async function registerNewCredential (newCredential: unknown) {
       clientDataJson: coerceToBase64Url(clientDataJSON)
     }
   }
-
-  let response
-  try {
-    response = await registerCredentialWithServer(data)
-  } catch (e) {
-    console.error(e)
+  const formData = {
+    session,
+    credential: data
   }
 
-  console.log('Credential Object', response)
 
-  // show error
-  if (response.status !== 'ok') {
+  const registerResult = await registerCredentialWithServer(formData) 
+  if (registerResult.code !== 200 || !registerResult.data) {
     console.log('Error creating credential')
-    console.log(response.errorMessage)
-    console.error(response.errorMessage)
+    console.error('registerResult.message', registerResult.message)
     return
   }
+
+  const response = registerResult.data
+  
+  console.log('Credential Object', response)
 
   // show success 
   console.log({

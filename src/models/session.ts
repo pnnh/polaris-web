@@ -21,31 +21,23 @@ export async function handleSignInSubmit (username: string) {
   const formData = new FormData()
   formData.append('username', username)
   
-  // send to server for registering
-  let makeAssertionOptions
-  try {
-    const res = await fetch('/restful/session/assertionOptions', {
-      method: 'POST', // or 'PUT'
-      body: formData, // data can be `string` or {object}!
-      headers: {
-        Accept: 'application/json'
-      }
-    })
-  
-    makeAssertionOptions = await res.json()
-  } catch (e) {
-    console.error('Request to server failed', e)
-  }
-  
-  console.log('Assertion Options Object', makeAssertionOptions)
-  
-  // show options error to user
-  if (makeAssertionOptions.status !== 'ok') {
+  const res = await fetch('/restful/session/assertionOptions', {
+    method: 'POST', // or 'PUT'
+    body: formData, // data can be `string` or {object}!
+    headers: {
+      Accept: 'application/json'
+    }
+  })
+  const fetchResult = await res.json() 
+  if (fetchResult.code !== 200 || !fetchResult.data) {
     console.log('Error creating assertion options')
-    console.log(makeAssertionOptions.errorMessage)
-    console.error(makeAssertionOptions.errorMessage)
+    console.error('fetchResult.message', fetchResult.message)
     return
   }
+
+  const makeAssertionOptions = fetchResult.data.options
+  
+  console.log('Assertion Options Object', makeAssertionOptions)
   
   // todo: switch this to coercebase64
   const challenge = makeAssertionOptions.challenge.replace(/-/g, '+').replace(/_/g, '/')
@@ -78,7 +70,7 @@ export async function handleSignInSubmit (username: string) {
   }
   
   try {
-    await verifyAssertionWithServer(credential)
+    await verifyAssertionWithServer(fetchResult.data.session, credential)
   } catch (e) {
     console.error('Could not verify assertion', e)
   }
@@ -88,7 +80,7 @@ export async function handleSignInSubmit (username: string) {
   * Sends the credential to the the FIDO2 server for assertion
   * @param {any} assertedCredential
   */
-export async function verifyAssertionWithServer (assertedCredential) {
+export async function verifyAssertionWithServer (session: string, assertedCredential: unknown) {
   
   // Move data into Arrays incase it is super long
   const authData = new Uint8Array(assertedCredential.response.authenticatorData)
@@ -108,12 +100,16 @@ export async function verifyAssertionWithServer (assertedCredential) {
       signature: coerceToBase64Url(sig)
     }
   }
+  const formData = {
+    session,
+    credential: data
+  }
   
   let response
   try {
     const res = await fetch('/restful/session/makeAssertion', {
       method: 'POST', // or 'PUT'
-      body: JSON.stringify(data), // data can be `string` or {object}!
+      body: JSON.stringify(formData), // data can be `string` or {object}!
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'

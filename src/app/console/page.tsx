@@ -1,4 +1,3 @@
-import { checkAuth } from '@/services/auth'
 
 export default async function Page () {
  
