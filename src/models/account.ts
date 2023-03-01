@@ -9,7 +9,8 @@ export class UserModel {
 }
 
 export async function tokenIntrospection (token: string): Promise<UserModel | null> {
-  const response = await axios.get<CommonReslut<UserModel>>(RestfulAddress.ArticleService + '/account/userinfo',
+  const response = await axios.post<CommonReslut<UserModel>>(RestfulAddress.ArticleService + '/account/userinfo',
+    {},
     {
       params: {}, 
       headers: {Authorization: token},
