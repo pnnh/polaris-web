@@ -1,23 +1,12 @@
-import { tokenIntrospection } from '@/models/account' 
+import { getAccountModel } from '@/models/account' 
 import { decryptAes } from '@/utils/aes' 
-import { cookies, headers } from 'next/headers'  
+import { cookies } from 'next/headers'  
 
 export async function checkAuth () {
   const cookieStore = cookies()
   const token = cookieStore.get('a') 
  
-  console.debug('proxyAuthorization:', token)
-  //return await parseAuthorization('proxyAuthorization')
-  // if (!authorization) {
-  //   return null
-  // }
-  // console.debug('parseAuthorization', authorization)
- 
-  // const info = parseAuthorizationHeader(authorization)
-  // console.debug('info:', info)
-  // if (!info) {
-  //   return null
-  // }
+  console.debug('proxyAuthorization:', token) 
   if (!token || !token.value) {
     return null
   }
@@ -26,7 +15,7 @@ export async function checkAuth () {
     return null
   }
   auth = 'Bearer ' + auth
-  const result = await tokenIntrospection(auth)
+  const result = await getAccountModel(auth)
   console.debug('result222:', result)
   return result
 }

@@ -4,12 +4,20 @@ import axios from 'axios'
 import { CommonReslut } from './common-result'
   
 
-export class UserModel {
-  username = ''
+export class AccountModel {
+  pk = '' 
+  createat: Date = new Date()
+  updateat: Date = new Date()
+  account = ''
+  image = ''
+  description = ''
+  mail = ''
+  nickname = ''
+  
 }
 
-export async function tokenIntrospection (token: string): Promise<UserModel | null> {
-  const response = await axios.post<CommonReslut<UserModel>>(RestfulAddress.ArticleService + '/account/userinfo',
+export async function getAccountModel (token: string): Promise<AccountModel | null> {
+  const response = await axios.post<CommonReslut<AccountModel>>(RestfulAddress.ServerUrl + '/account/userinfo',
     {},
     {
       params: {}, 
@@ -23,12 +31,13 @@ export async function tokenIntrospection (token: string): Promise<UserModel | nu
   if (response?.status !== 200) {
     return null
   }
+  console.log('getAccountModel', response.data)
   return response.data.data
 }
 
 
 export async function makeCredentialOptions (formData: unknown): Promise<unknown | null> {
-  const response = await axios.post<CommonReslut<unknown>>(RestfulAddress.ArticleService + '/account/makeCredentialOptions',
+  const response = await axios.post<CommonReslut<unknown>>(RestfulAddress.ServerUrl + '/account/makeCredentialOptions',
     formData,
     { 
       headers: {},
@@ -44,7 +53,7 @@ export async function makeCredentialOptions (formData: unknown): Promise<unknown
 }
 
 export async function makeCredential (formData: unknown): Promise<unknown | null> {
-  const response = await axios.post<CommonReslut<unknown>>(RestfulAddress.ArticleService + '/account/makeCredential',
+  const response = await axios.post<CommonReslut<unknown>>(RestfulAddress.ServerUrl + '/account/makeCredential',
     formData,
     { 
       headers: {
@@ -63,7 +72,7 @@ export async function makeCredential (formData: unknown): Promise<unknown | null
 
 
 export async function makeAssertionOptions (formData: unknown): Promise<unknown | null> {
-  const response = await axios.post<CommonReslut<unknown>>(RestfulAddress.ArticleService + '/session/assertionOptions',
+  const response = await axios.post<CommonReslut<unknown>>(RestfulAddress.ServerUrl + '/session/assertionOptions',
     formData,
     { 
       headers: {},
@@ -78,8 +87,12 @@ export async function makeAssertionOptions (formData: unknown): Promise<unknown 
   return response.data
 }
 
-export async function makeAssertion (formData: unknown): Promise<unknown | null> {
-  const response = await axios.post<CommonReslut<unknown>>(RestfulAddress.ArticleService + '/session/makeAssertion',
+export interface makeAssertionResult {
+  authorization: string
+}
+
+export async function makeAssertion (formData: unknown): Promise<CommonReslut<makeAssertionResult> | null> {
+  const response = await axios.post<CommonReslut<makeAssertionResult>>(RestfulAddress.ServerUrl + '/session/makeAssertion',
     formData,
     { 
       headers: {

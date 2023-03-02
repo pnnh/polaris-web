@@ -1,15 +1,10 @@
 
 export class RestfulAddress {
-  static get ArticleService () {
+  static get ServerUrl () {
     if (isNodejs()) {
       return process.env.SERVER
     }
     return ''
-  }
-
-  static get AuthUrl () {
-    // multiverse授权登录服务地址
-    return process.env.NEXT_PUBLIC_LOGIN_URL
   }
 }
 

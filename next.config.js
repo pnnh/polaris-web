@@ -20,6 +20,15 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  hmr: false,
+  webpackDevMiddleware: (config) => {
+    config.watchOptions = config.watchOptions || {}
+    config.watchOptions.ignored = [ 
+      /.*/,
+    ]
+    config.lazy = true
+    return config
+  },
   // async rewrites () { 
   //   return [
   //     {

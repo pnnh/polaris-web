@@ -9,7 +9,7 @@ export async function loadHeaderNav () {
   console.log('auth:', auth)
   let helloElement: JSX.Element
   if (auth) { 
-    helloElement = <div>{'欢迎：' + auth.username}</div>
+    helloElement = <div>{'欢迎：' + auth.nickname}</div>
   } else {
     helloElement = <PSLinkButton href={'/account/signin'} className={styles.loginLink}>登录</PSLinkButton>
   }

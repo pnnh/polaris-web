@@ -3,8 +3,9 @@
 import React, { useState } from 'react'  
 import styles from './page.module.css'
 import { PSCard } from '@/components/client/controls'
-import Link from 'next/link'
-import { coerceToBase64Url } from '@/utils/webauthn' 
+import Link from 'next/link' 
+import { startAuthentication } from '@simplewebauthn/browser'
+import { AuthenticationResponseJSON } from '@simplewebauthn/typescript-types'
 
 export default function Home () { 
   const [username, setUsername] = useState('') 
@@ -60,17 +61,17 @@ export async function handleSignInSubmit (username: string) {
   
   console.log('Assertion Options Object', makeAssertionOptions)
   
-  // todo: switch this to coercebase64
-  const challenge = makeAssertionOptions.challenge.replace(/-/g, '+').replace(/_/g, '/')
-  makeAssertionOptions.challenge = Uint8Array.from(atob(challenge), c => c.charCodeAt(0))
+  // // todo: switch this to coercebase64
+  // const challenge = makeAssertionOptions.challenge.replace(/-/g, '+').replace(/_/g, '/')
+  // makeAssertionOptions.challenge = Uint8Array.from(atob(challenge), c => c.charCodeAt(0))
   
-  // fix escaping. Change this to coerce
-  makeAssertionOptions.allowCredentials.forEach(function (listItem) {
-    const fixedId = listItem.id.replace(/\_/g, '/').replace(/\-/g, '+')
-    listItem.id = Uint8Array.from(atob(fixedId), c => c.charCodeAt(0))
-  })
+  // // fix escaping. Change this to coerce
+  // makeAssertionOptions.allowCredentials.forEach(function (listItem) {
+  //   const fixedId = listItem.id.replace(/\_/g, '/').replace(/\-/g, '+')
+  //   listItem.id = Uint8Array.from(atob(fixedId), c => c.charCodeAt(0))
+  // })
   
-  console.log('Assertion options', makeAssertionOptions)
+  // console.log('Assertion options', makeAssertionOptions)
   
   console.log({
     title: 'Logging In...',
@@ -81,49 +82,43 @@ export async function handleSignInSubmit (username: string) {
     focusConfirm: false,
     focusCancel: false
   })
+
+  const attResp = await startAuthentication(makeAssertionOptions)
+  console.log('attResp', attResp)
   
-  // ask browser for credentials (browser will ask connected authenticators)
-  let credential
-  try {
-    credential = await navigator.credentials.get({ publicKey: makeAssertionOptions })
-  } catch (err) {
-    console.error(err.message ? err.message : err)
-  }
-  
-  try {
-    await verifyAssertionWithServer(fetchResult.data.session, credential)
-  } catch (e) {
-    console.error('Could not verify assertion', e)
-  }
+  // const credential = await navigator.credentials.get({ publicKey: makeAssertionOptions }) 
+  // if (!credential) {
+  //   console.log('Error creating assertion')
+  //   return
+  // }
+   
+  await verifyAssertionWithServer(fetchResult.data.session, attResp) 
 }
   
-/**
-  * Sends the credential to the the FIDO2 server for assertion
-  * @param {any} assertedCredential
-  */
-export async function verifyAssertionWithServer (session: string, assertedCredential: unknown) {
+
+export async function verifyAssertionWithServer (session: string, assertedCredential: AuthenticationResponseJSON) {
   
   // Move data into Arrays incase it is super long
-  const authData = new Uint8Array(assertedCredential.response.authenticatorData)
-  const clientDataJSON = new Uint8Array(assertedCredential.response.clientDataJSON)
-  const rawId = new Uint8Array(assertedCredential.rawId)
-  const sig = new Uint8Array(assertedCredential.response.signature)
-  const userHandle = new Uint8Array(assertedCredential.response.userHandle)
-  const data = {
-    id: assertedCredential.id,
-    rawId: coerceToBase64Url(rawId),
-    type: assertedCredential.type,
-    extensions: assertedCredential.getClientExtensionResults(),
-    response: {
-      authenticatorData: coerceToBase64Url(authData),
-      clientDataJSON: coerceToBase64Url(clientDataJSON),
-      userHandle: userHandle !== null ? coerceToBase64Url(userHandle): null,
-      signature: coerceToBase64Url(sig)
-    }
-  }
+  // const authData = new Uint8Array(assertedCredential.response.authenticatorData)
+  // const clientDataJSON = new Uint8Array(assertedCredential.response.clientDataJSON)
+  // const rawId = new Uint8Array(assertedCredential.rawId)
+  // const sig = new Uint8Array(assertedCredential.response.signature)
+  // const userHandle = new Uint8Array(assertedCredential.response.userHandle)
+  // const data = {
+  //   id: assertedCredential.id,
+  //   rawId: coerceToBase64Url(rawId),
+  //   type: assertedCredential.type,
+  //   extensions: assertedCredential.getClientExtensionResults(),
+  //   response: {
+  //     authenticatorData: coerceToBase64Url(authData),
+  //     clientDataJSON: coerceToBase64Url(clientDataJSON),
+  //     userHandle: userHandle !== null ? coerceToBase64Url(userHandle): null,
+  //     signature: coerceToBase64Url(sig)
+  //   }
+  // }
   const formData = {
     session,
-    credential: data
+    credential: assertedCredential
   }
   
   let response
