@@ -22,9 +22,9 @@ export default function Home () {
                             </span>
                         </div>
               <div className={styles.actionRow}>
-                <button onClick={()=> {
+                <button className="btn" onClick={()=> {
                   handleSignInSubmit(username)
-                }}>点击登录</button>
+                }}>点击登录</button> 
               </div>    
             </div> 
             <div className={styles.otherBox}>
