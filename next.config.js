@@ -29,14 +29,14 @@ const nextConfig = {
     config.lazy = true
     return config
   },
-  // async rewrites () { 
-  //   return [
-  //     {
-  //       source: '/restful/:path*',
-  //       destination: serverUrl + '/:path*',
-  //     },
-  //   ]
-  // },
+  async rewrites () { 
+    return [
+      {
+        source: '/server/:path*',
+        destination: serverUrl + '/:path*',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
